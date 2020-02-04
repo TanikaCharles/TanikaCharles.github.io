@@ -1,11 +1,17 @@
+
 body {
 	text-align: center;
 	font-family: 'Roboto', sans-serif;
 }
 
 h1 {
-	font-family: 'Parisienne', cursive;
+	font-family: 'Sigmar One', cursive;
+}
 
+.deleteBtn {
+	background-color: red;
+	float: right;
+	border-radius: 5px;
 }
 
 #top-bar {
@@ -30,6 +36,14 @@ h1 {
 	color: dimgray;
 }
 
+#new_artist_form {
+	width: 40%;
+	margin: 0 auto;
+	display: grid;
+	color: dimgray;
+	display: none;
+}
+
 .artist{
 	border: solid;
 	border-width: thin;
@@ -45,11 +59,16 @@ h1 {
 		
 }
 .desc {
-	width: 70%;
+	width: 60%;
 	float: right;
+}
+
+.desc p {
+	float: left;
+	width: 60%;
+	margin: 0;
 }
 
 #artist-list :hover {
 	background-color: lightgray;
-	
 }
