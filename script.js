@@ -1,11 +1,25 @@
 let artistList = document.getElementById('artist-list');
 let artistForm = document.getElementById("new_artist_form");
+let myStorage = window.localStorage;
 
+if(myStorage.getItem('artistList') != undefined){
+	artistList.innerHTML = myStorage.getItem('artistList');
+	let buttons = document.getElementsByClassName("deleteBtn");
+	for (var i = 0; i < buttons.length; i++) {
+		buttons[i].addEventListener('click', deleteArtist);
+	}
+}
 
 let addButton = document.getElementById('submit');
 addButton.addEventListener("click", addArtist);
 
+let searchButton = document.getElementById('search');
+searchButton.addEventListener('click', search);
+
 function showArtistForm(){
+	if(myStorage.getItem('artistList') != undefined){
+		artistList.innerHTML = myStorage.getItem('artistList');
+	}
 	document.getElementById("addArtistPhoto").value = '';
 	document.getElementById('addArtistDesc').value = '';
 	document.getElementById('addArtistName').value = '';
@@ -15,6 +29,9 @@ function showArtistForm(){
 }
 
 function addArtist() {
+	if(myStorage.getItem('artistList') != undefined){
+		artistList.innerHTML = myStorage.getItem('artistList');
+	}
 	let addArtistPhoto = document.getElementById("addArtistPhoto").value;
 	
 	let addArtistDesc = document.getElementById('addArtistDesc').value;
@@ -49,12 +66,29 @@ function addArtist() {
 	artistList.appendChild(artist);
 	artistList.style.display = "grid";
 	artistForm.style.display = "none";
+	
+	myStorage.setItem('artistList', artistList.innerHTML);
 }
 
 function deleteArtist() {
-	console.log(this.parentElement);
 	artistList.removeChild(this.parentElement.parentElement);
+	myStorage.setItem('artistList', artistList.innerHTML);
 }
 
-
+function search(){
+	if(myStorage.getItem('artistList') != undefined){
+		artistList.innerHTML = myStorage.getItem('artistList');
+	}
+	searchBar = document.getElementById("searchText").value;
+	var artistSearch = document.getElementsByClassName("artist");
+	var h5 = [];
+	for (var i = 0; i < artistSearch.length; i++) {
+		h5 = artistSearch[i].getElementsByTagName('h5');
+		for (var j = 0; j < h5.length; j++) {
+			if(!h5[j].innerText.includes(searchBar)){
+				artistList.removeChild(h5[j].parentElement.parentElement);
+			}
+		}
+	}
+}
 
